@@ -1,6 +1,8 @@
 var fja = fja || {};
 
 fja.gameControl = (function () {
+    "use strict";
+
     var _begin_play_msg_callback_id = -1,
         _game_over_msg_callback_id = -1,
         _collision_check_callback_id = -1,
@@ -85,4 +87,4 @@ fja.gameControl = (function () {
     function _stop_given_render_prep(renderPrepID) {
         fja.screen.removeFromRenderPreperation(renderPrepID);
     }
-}());
+})();

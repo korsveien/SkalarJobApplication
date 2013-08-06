@@ -1,6 +1,8 @@
 fja = fja || {};
 
 fja.playerControl = (function() {
+    "use strict";
+
     var _player_sprite = fja.createSprite("player.png", 1, 1, 1),
         _x_target = 0,
         _y_target = 0,
@@ -11,7 +13,7 @@ fja.playerControl = (function() {
 
     return {
         get playerSprite() { return _player_sprite; },
-        
+
         initPlayer: _init_player,
         deInitPlayer: _de_init_player
     };
@@ -38,7 +40,7 @@ fja.playerControl = (function() {
     function _on_input(event) {
         var actualX = event.pageX - fja.canvas.offsetLeft,
             actualY = event.pageY - fja.canvas.offsetTop;
-        
+
         _set_xy_target(actualX, actualY);
     }
 
@@ -74,4 +76,4 @@ fja.playerControl = (function() {
 
         _player_sprite.move(newXPos, newYPos);
     }
-}());
+})();

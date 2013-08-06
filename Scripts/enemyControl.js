@@ -1,6 +1,8 @@
 fja = fja || {};
 
 fja.enemyControl = (function() {
+    "use strict";
+
     var _is_spawning = false,
         _current_level = 0,
         _enemy_life_expectancy = 5000,
@@ -11,7 +13,7 @@ fja.enemyControl = (function() {
 
     return {
         get currentLevel() { return _current_level; },
-        
+
         startSpawn: _start_spawn,
         stopSpawn: _stop_spawn,
         checkForCollision: _check_for_collision
@@ -155,4 +157,4 @@ fja.enemyControl = (function() {
     function _remove_sprite_from_render_list(spriteToRemove) {
         fja.screen.removeFromRenderList(spriteToRemove.__id__);
     }
-}());
+})();

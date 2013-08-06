@@ -1,6 +1,8 @@
 var fja = fja || {};
 
 fja.createSprite = function(filename, fps, animations, frames) {
+    "use strict";
+
     var _image = new Image(),
         _x = 0,
         _y = 0,

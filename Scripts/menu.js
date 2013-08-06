@@ -1,6 +1,8 @@
 var fja = fja || {};
 
 fja.menu = (function () {
+    "use strict";
+
     var _active_page_id = "",
         _active_menuitem_element = "";
 
@@ -29,7 +31,9 @@ fja.menu = (function () {
 
     function _bind_menu_items() {
         var menuItems = document.getElementsByClassName("menuItem"),
-            index, elementID, divIdToBind;
+            index,
+            elementID,
+            divIdToBind;
 
         for (index = 0; index < menuItems.length; index++) {
             elementID = menuItems[index].id;

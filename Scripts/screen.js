@@ -1,7 +1,9 @@
 var fja = fja || {};
 
 fja.screen = (function() {
-	var _render_preperation_callbacks = [],
+    "use strict";
+
+    var _render_preperation_callbacks = [],
         _render_list = [],
         _original_canvas_width = 480,
         _original_canvas_heigth = 840,
@@ -10,33 +12,29 @@ fja.screen = (function() {
         _general_purpose_unique_id = 0;
 
 
-	return {
+    return {
         get canvasWidth() { return fja.canvas.width; },
         get canvasHeight() { return fja.canvas.height; },
         get canvasWidthScale() { return _canvas_width_scale; },
         get canvasHeightScale() { return _canvas_heigth_scale; },
 
-		addToRenderList: _add_to_render_list,
+        addToRenderList: _add_to_render_list,
         removeFromRenderList: _remove_from_render_list,
         addToRenderPreperation: _add_to_render_preperation,
         removeFromRenderPreperation: _remove_from_render_preperation,
-		render: _render,
+        render: _render,
         clearScreen: _clear_screen,
         calculateCanvasScale: _calculate_canvas_scale
-	};
+    };
 
 
-	function _add_to_render_list(renderableObject) {
-		if (typeof renderableObject.render !== "function") {
-			throw { name: "Missing render method" };
-		}
-
+    function _add_to_render_list(renderableObject) {
         renderableObject.__id__ = _general_purpose_unique_id;
-		_render_list.push(renderableObject);
+        _render_list.push(renderableObject);
         _general_purpose_unique_id++;
 
         return renderableObject.__id__;
-	}
+    }
 
     function _remove_from_render_list(id) {
         for (var i = 0; i < _render_list.length; i++) {
@@ -73,8 +71,8 @@ fja.screen = (function() {
         }
     }
 
-	function _render() {
-		var i,
+    function _render() {
+        var i,
             len = _render_list.length;
 
         fja.canvasContext.fillStyle = "#000000";
@@ -82,10 +80,10 @@ fja.screen = (function() {
 
         _render_preperation();
 
-		for (i = 0; i < len; i++) {
-			_render_list[i].render();
-		}
-	}
+        for (i = 0; i < len; i++) {
+            _render_list[i].render();
+        }
+    }
 
     function _clear_screen() {
         _render_list = [];
@@ -95,4 +93,4 @@ fja.screen = (function() {
         _canvas_width_scale = fja.canvas.width / _original_canvas_width;
         _canvas_heigth_scale = fja.canvas.height / _original_canvas_heigth;
     }
-}());
+})();
