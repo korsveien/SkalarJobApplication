@@ -1,0 +1,11 @@
+{
+    "name": "fja",
+    "description": "Job application for HTML5, CSS3, Javascript and Node.JS",
+    "version": "1.1.0",
+    "author": "Robin Heggelund Hansen",
+    "private": true,
+    "dependencies": {
+        "express": ">= 3.3.x"
+    },
+    "main": "index"
+}
