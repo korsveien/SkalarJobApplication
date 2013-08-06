@@ -1,5 +1,8 @@
 exports.init = function (app) {
     app.get("/", function(req, res) {
-        res.send("Hello world");
+        res.render("index.html", {
+            title: "Fja",
+            message: "Hello World"
+        });
     });
 }
