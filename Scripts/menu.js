@@ -13,8 +13,6 @@ fja.menu = (function () {
 
 
     function _change_active_page(pageID) {
-        fja.utils.assertString(pageID);
-
         var pageToActivate = document.getElementById(pageID),
             pageToDeactivate = document.getElementById(_active_page_id);
 
@@ -30,10 +28,10 @@ fja.menu = (function () {
     }
 
     function _bind_menu_items() {
-        var menuItems = fja.utils.getElementsByClass("menuItem"),
+        var menuItems = document.getElementsByClassName("menuItem"),
             index, elementID, divIdToBind;
 
-        for (index in menuItems) {
+        for (index = 0; index < menuItems.length; index++) {
             elementID = menuItems[index].id;
             divIdToBind = elementID.replace("Item", "");
 
@@ -48,7 +46,7 @@ fja.menu = (function () {
 
     function _change_menuitem_to_active(menuElementID) {
         var menuElement = document.getElementById(menuElementID);
-        
+
         if (_active_menuitem_element !== "")
             _active_menuitem_element.className = "menuItem";
 
@@ -82,7 +80,7 @@ fja.menu = (function () {
 
         if (pageToFadeIn.style.display !== "block")
             pageToFadeIn.style.display = "block";
-        
+
         if (pageToFadeIn.style.opacity === "") {
             pageToFadeIn.style.opacity = 0;
         } else if (pageToFadeIn.style.opacity >= 1) {

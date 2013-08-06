@@ -39,8 +39,6 @@ fja.screen = (function() {
 	}
 
     function _remove_from_render_list(id) {
-        fja.utils.assertNumber(id);
-
         for (var i = 0; i < _render_list.length; i++) {
             if (_render_list[i].__id__ === id) {
                 _render_list.splice(i, 1);
@@ -50,8 +48,6 @@ fja.screen = (function() {
     }
 
     function _add_to_render_preperation(callback) {
-        fja.utils.assertFunction(callback);
-
         callback.__id__ = _general_purpose_unique_id;
         _render_preperation_callbacks.push(callback);
         _general_purpose_unique_id++;
@@ -60,8 +56,6 @@ fja.screen = (function() {
     }
 
     function _remove_from_render_preperation(id) {
-        fja.utils.assertNumber(id);
-
         for (var i = 0; i < _render_preperation_callbacks.length; i++) {
             if (_render_preperation_callbacks[i].__id__ === id) {
                 _render_preperation_callbacks.splice(i, 1);

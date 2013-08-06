@@ -12,11 +12,6 @@ fja.createSprite = function(filename, fps, animations, frames) {
         _frame_interval = 0,
         _time_since_last_frame = 0;
 
-    fja.utils.assertString(filename);
-    fja.utils.assertNumber(fps);
-    fja.utils.assertNumber(animations);
-    fja.utils.assertNumber(frames);
-    
     _set_image_src(filename);
     _set_frame_interval(fps);
 
@@ -45,17 +40,12 @@ fja.createSprite = function(filename, fps, animations, frames) {
     }
 
     function _move(x, y) {
-        fja.utils.assertNumber(x);
-        fja.utils.assertNumber(y);
-
         _x = x;
         _y = y;
         _need_render = true;
     }
 
     function _set_animation(animationAsNumber) {
-        fja.utils.assertNumber(animationAsNumber);
-
         if (animationAsNumber >= animations)
             throw { name: "Animation out of range" };
         else if (animationAsNumber < 0)
