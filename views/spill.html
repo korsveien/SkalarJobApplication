@@ -2,4 +2,26 @@
 
 {% block subtitle %}- Spill{% endblock %}
 
-{% block content %}Spill{% endblock %}
+{% block scripts %}
+    <script src="script/fja.js" type="text/javascript"></script>
+    <script src="script/utils.js" type="text/javascript"></script>
+    <script src="script/screen.js" type="text/javascript"></script>
+    <script src="script/sprite.js" type="text/javascript"></script>
+    <script src="script/enemyControl.js" type="text/javascript"></script>
+    <script src="script/playerControl.js" type="text/javascript"></script>
+    <script src="script/gameControl.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', fja.init, false);
+    </script>
+{% endblock %}
+
+{% block content %}
+    <canvas id="canvas" width="240" height="420"></canvas>
+    <h3>Jet Challenge</h3>
+
+    <p>The goal in this game is to avoid the incoming missiles for as long as possible.
+        Control your airplane with your mouse, clicking on the place you wish it to fly.</p>
+
+    <p>Good luck!</p>
+{% endblock %}

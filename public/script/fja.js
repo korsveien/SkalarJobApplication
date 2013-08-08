@@ -12,8 +12,5 @@ fja.init = function() {
 
     setInterval(fja.screen.render, 10);
 
-    fja.menu.bindMenuItems();
-    fja.menu.changeActiveMenuItem("applicationItem");
-    fja.menu.changeActivePage("application");
     fja.gameControl.prepareForPlay();
 };
