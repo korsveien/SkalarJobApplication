@@ -1,8 +1,27 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title|title }}</title>
+    <meta charset="utf-8"/>
+
+    <title>Jobbsøknad {% block subtitle %}{% endblock %}</title>
+
+    <link href="css/style.css" rel="stylesheet" />
+
+    {% block scripts %}{% endblock %}
 </head>
 <body>
-    {{ message }}
+    <div id="menuBar">
+        <ul id="menuList">
+            {% for menuItem in menuItems %}
+            <li class="menuItem"{% if menuItem.name == activeItem %} id="activeItem"{% endif %}>
+                <a href="{{ menuItem.url }}">{{ menuItem.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

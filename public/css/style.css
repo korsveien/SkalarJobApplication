@@ -40,9 +40,8 @@
     cursor: pointer;
 }
 
-.pageContent {
+#content {
     width: 500px;
     margin-right: auto;
     margin-left: auto;
-    display: none;
 }
