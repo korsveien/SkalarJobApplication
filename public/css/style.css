@@ -1,47 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 #menuBar {
-    background-color: black;
+    position: fixed;
+    width: 100%;
+    background-color: #000028;
 }
 
 #menuList {
-    padding: 0;
-    width: 500px;
-    height: 30px;
-    margin-right: auto;
-    margin-left: auto;
-    list-style-type: none;
+    width: 24em;
+    margin: 0 auto;
 }
 
 .menuItem {
     display: inline-block;
+    list-style: none;
+    width: 4em;
+    height: 1.8em;
+    line-height: 1.8em;
+    font-size: 1.5em;
     text-align: center;
     vertical-align: middle;
-    width: 80px;
-    height: inherit;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
 }
 
-.menuItem:hover {
-    background-color: orange;
-    color: black;
+.menuItem a {
+    color: #a3d5b9;
+    text-decoration: none;
 }
 
-.activeMenuItem {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    width: 80px;
-    height: inherit;
-    background-color: orange;
+.menuItem a:hover {
     color: white;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 #content {
-    width: 500px;
-    margin-right: auto;
-    margin-left: auto;
+    padding-top: 3.5em;
+    width: 33em;
+    margin: 0 auto;
 }
