@@ -3,77 +3,79 @@ fja = fja || {};
 fja.playerControl = (function() {
     "use strict";
 
-    var _player_sprite = fja.createSprite("player.png", 1, 1, 1),
-        _x_target = 0,
-        _y_target = 0,
-        _pixel_movement_per_ms = 0.1,
-        _last_movement_time = Date.now(),
-        _move_player_callback_id = -1;
+    var playerSprite = fja.createSprite("player.png", 1, 1, 1),
+        xTarget = 0,
+        yTarget = 0,
+        pixelMovementPerMs = 0.1,
+        lastMovementTime = Date.now(),
+        movePlayerCallbackId = -1;
 
 
     return {
-        get playerSprite() { return _player_sprite; },
+        get playerSprite() { return playerSprite; },
 
-        initPlayer: _init_player,
-        deInitPlayer: _de_init_player
+        initPlayer: initPlayer,
+        deInitPlayer: deInitPlayer
     };
 
 
-    function _init_player() {
+    function initPlayer() {
         var middleOfScreen = fja.screen.canvasWidth/2,
-            bottomOfScreen = fja.screen.canvasHeight - _player_sprite.height/2;
+            bottomOfScreen = fja.screen.canvasHeight - playerSprite.height/2;
 
-        _set_xy_target(middleOfScreen, bottomOfScreen);
-        _player_sprite.move(middleOfScreen, bottomOfScreen);
+        setXyTarget(middleOfScreen, bottomOfScreen);
+        playerSprite.move(middleOfScreen, bottomOfScreen);
 
-        fja.canvas.onmousedown = _on_input;
-        fja.screen.addToRenderPreperation(_move_player_to_target);
-        fja.screen.addToRenderList(_player_sprite);
+        fja.canvas.onmousedown = onInput;
+        fja.screen.addToRenderPreperation(movePlayerToTarget);
+        fja.screen.addToRenderList(playerSprite);
     }
 
-    function _de_init_player() {
-        fja.screen.removeFromRenderPreperation(_move_player_callback_id);
-        _move_player_callback_id = -1;
+    function deInitPlayer() {
+        fja.screen.removeFromRenderPreperation(movePlayerCallbackId);
+        movePlayerCallbackId = -1;
         fja.canvas.onmousedown = "";
     }
 
-    function _on_input(event) {
+    function onInput(event) {
         var actualX = event.pageX - fja.canvas.offsetLeft,
             actualY = event.pageY - fja.canvas.offsetTop;
 
-        _set_xy_target(actualX, actualY);
+        setXyTarget(actualX, actualY);
     }
 
-    function _set_xy_target(x, y) {
-        _x_target = Math.round(x - (_player_sprite.width/2));
-        _y_target = Math.round(y - (_player_sprite.height/2));
+    function setXyTarget(x, y) {
+        xTarget = Math.round(x - (playerSprite.width / 2));
+        yTarget = Math.round(y - (playerSprite.height / 2));
     }
 
-    function _move_player_to_target() {
-        var timeSinceLastMovement = Date.now() - _last_movement_time,
-            pixels_to_move = Math.round(timeSinceLastMovement * _pixel_movement_per_ms),
+    function movePlayerToTarget() {
+        var timeSinceLastMovement = Date.now() - lastMovementTime,
+            pixels_to_move = Math.round(timeSinceLastMovement * pixelMovementPerMs),
             i,
-            newXPos = _player_sprite.x,
-            newYPos = _player_sprite.y;
+            newXPos = playerSprite.x,
+            newYPos = playerSprite.y;
 
         for (i = 0; i < pixels_to_move; i++) {
-            if (_player_sprite.x < _x_target) {
+            if (playerSprite.x < xTarget) {
                 newXPos++;
-            } else if (_player_sprite.x > _x_target) {
+            } else if (playerSprite.x > xTarget) {
                 newXPos--;
             }
 
-            if (_player_sprite.y < _y_target) {
+            if (playerSprite.y < yTarget) {
                 newYPos++;
-            } else if (_player_sprite.y > _y_target) {
+            } else if (playerSprite.y > yTarget) {
                 newYPos--;
             }
         }
-        _last_movement_time = Date.now();
 
-        if (newXPos < 0 || newYPos < 0)
+        lastMovementTime = Date.now();
+
+        if (newXPos < 0 || newYPos < 0) {
             return;
+        }
 
-        _player_sprite.move(newXPos, newYPos);
+        playerSprite.move(newXPos, newYPos);
     }
 })();

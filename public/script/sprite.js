@@ -3,92 +3,93 @@ var fja = fja || {};
 fja.createSprite = function(filename, fps, animations, frames) {
     "use strict";
 
-    var _image = new Image(),
-        _x = 0,
-        _y = 0,
-        _current_frame = 0,
-        _current_animation = 0,
-        _frame_width = 0,
-        _frame_height = 0,
-        _need_render = true,
-        _frame_interval = 0,
-        _time_since_last_frame = 0;
+    var image = new Image(),
+        x = 0,
+        y = 0,
+        currentFrame = 0,
+        currentAnimation = 0,
+        frameWidth = 0,
+        frameHeight = 0,
+        needRender = true,
+        frameInterval = 0,
+        timeSinceLastFrame = 0;
 
-    _set_image_src(filename);
-    _set_frame_interval(fps);
+    setImageSource(filename);
+    setFrameInterval(fps);
 
 
     return {
-        get x() { return _x; },
-        get y() { return _y; },
-        get width() { return _frame_width * fja.screen.canvasWidthScale; },
-        get height() { return _frame_height * fja.screen.canvasHeightScale; },
+        get x() { return x; },
+        get y() { return y; },
+        get width() { return frameWidth * fja.screen.canvasWidthScale; },
+        get height() { return frameHeight * fja.screen.canvasHeightScale; },
 
-        render: _render,
-        move: _move,
-        setAnimation: _set_animation
+        render: render,
+        move: move,
+        setAnimation: setAnimation
     };
 
 
-    function _render() {
-        var widthDrawSize = _frame_width * fja.screen.canvasWidthScale,
-            heightDrawSize = _frame_height * fja.screen.canvasHeightScale;
+    function render() {
+        var widthDrawSize = frameWidth * fja.screen.canvasWidthScale,
+            heightDrawSize = frameHeight * fja.screen.canvasHeightScale;
 
-        fja.canvasContext.drawImage(_image,
-                                    _get_x_offset(), _get_y_offset(), _frame_width, _frame_height,
-                                    _x, _y, widthDrawSize, heightDrawSize);
-        _need_render = false;
-        _set_next_frame();
+        fja.canvasContext.drawImage(image,
+                                    getXOffset(), getYOffset(), frameWidth, frameHeight,
+                                    x, y, widthDrawSize, heightDrawSize);
+        needRender = false;
+        setNextFrame();
     }
 
-    function _move(x, y) {
-        _x = x;
-        _y = y;
-        _need_render = true;
+    function move(newX, newY) {
+        x = newX;
+        y = newY;
+        needRender = true;
     }
 
-    function _set_animation(animationAsNumber) {
-        if (animationAsNumber >= animations)
+    function setAnimation(animationAsNumber) {
+        if (animationAsNumber >= animations) {
             throw { name: "Animation out of range" };
-        else if (animationAsNumber < 0)
+        } else if (animationAsNumber < 0) {
             throw { name: "Animation out of range" };
+        }
 
-        _current_animation = animationAsNumber;
-        _need_render = true;
+        currentAnimation = animationAsNumber;
+        needRender = true;
     }
 
-    function _set_image_src(filename) {
-        _image.src = "img/" + filename;
-        _image.onload = _set_frame_dimensions;
+    function setImageSource(filename) {
+        image.src = "img/" + filename;
+        image.onload = setFrameDimensions;
     }
 
-    function _set_frame_interval(fps) {
-        _frame_interval = 1000 / fps;
+    function setFrameInterval(fps) {
+        frameInterval = 1000 / fps;
     }
 
-    function _set_frame_dimensions() {
-        _frame_width = _image.width / frames;
-        _frame_height = _image.height / animations;
+    function setFrameDimensions() {
+        frameWidth = image.width / frames;
+        frameHeight = image.height / animations;
     }
 
-    function _get_x_offset() {
-        return (_current_frame * _frame_width);
+    function getXOffset() {
+        return (currentFrame * frameWidth);
     }
 
-    function _get_y_offset() {
-        return (_current_animation * _frame_height);
+    function getYOffset() {
+        return (currentAnimation * frameHeight);
     }
 
-    function _set_next_frame() {
+    function setNextFrame() {
         var currentTime = Date.now();
-        var timeSinceLastUpdate = currentTime - _time_since_last_frame;
+        var timeSinceLastUpdate = currentTime - timeSinceLastFrame;
 
-        if (timeSinceLastUpdate > _frame_interval) {
-            _current_frame += 1;
-            _time_since_last_frame = currentTime;
+        if (timeSinceLastUpdate > frameInterval) {
+            currentFrame += 1;
+            timeSinceLastFrame = currentTime;
 
-            if (_current_frame >= frames)
-                _current_frame = 0;
+            if (currentFrame >= frames)
+                currentFrame = 0;
         }
     }
 };

@@ -3,33 +3,35 @@ var fja = fja || {};
 fja.gameControl = (function () {
     "use strict";
 
-    var _begin_play_msg_callback_id = -1,
-        _game_over_msg_callback_id = -1,
-        _collision_check_callback_id = -1,
-        _current_level_draw_callback_id = -1,
-        _current_level = 0,
-        _playing = false,
-        _game_start_delay_ms = 3500;
+    var beginPlayMsgCallbackId = -1,
+        gameOverMsgCallbackId = -1,
+        collisionCheckCallbackId = -1,
+        currentLevelDrawCallbackId = -1,
+        currentLevel = 0,
+        playing = false,
+        gameStartDelay = 3500;
 
 
     return {
-        prepareForPlay: _prepare_for_play
+        prepareForPlay: prepeareForPlay
     };
 
 
-    function _prepare_for_play() {
-        fja.canvas.onclick = _begin_play;
+    function prepeareForPlay() {
+        fja.canvas.onclick = beginPlay;
 
-        if (_game_over_msg_callback_id !== -1)
-            _stop_given_render_prep(_game_over_msg_callback_id);
+        if (gameOverMsgCallbackId !== -1) {
+            stopGivenRenderPrepId(gameOverMsgCallbackId);
+        }
 
-        _begin_play_msg_callback_id = fja.screen.addToRenderPreperation(_draw_begin_play_msg);
+        beginPlayMsgCallbackId = fja.screen.addToRenderPreperation(drawBeginPlayMsg);
 
-        if (_current_level_draw_callback_id === -1)
-            _current_level_draw_callback_id = fja.screen.addToRenderPreperation(_draw_current_level);
+        if (currentLevelDrawCallbackId === -1) {
+            currentLevelDrawCallbackId = fja.screen.addToRenderPreperation(drawCurrentLevel);
+        }
     }
 
-    function _draw_begin_play_msg() {
+    function drawBeginPlayMsg() {
         var xPos = fja.canvas.width / 2,
             yPos = fja.canvas.height / 2;
 
@@ -39,42 +41,47 @@ fja.gameControl = (function () {
         fja.canvasContext.fillText("Click to start game", xPos, yPos);
     }
 
-    function _begin_play() {
-        _stop_given_render_prep(_begin_play_msg_callback_id);
+    function beginPlay() {
+        stopGivenRenderPrepId(beginPlayMsgCallbackId);
         fja.playerControl.initPlayer();
         fja.enemyControl.startSpawn();
-        _collision_check_callback_id = fja.screen.addToRenderPreperation(_collision_check);
+        collisionCheckCallbackId = fja.screen.addToRenderPreperation(collisionCheck);
         fja.canvas.onclick = "";
-        _playing = true;
+        playing = true;
     }
 
-    function _collision_check() {
-        if (fja.enemyControl.checkForCollision(fja.playerControl.playerSprite))
-            _end_play();
+    function collisionCheck() {
+        if (fja.enemyControl.checkForCollision(fja.playerControl.playerSprite)) {
+            endPlay();
+        }
     }
 
-    function _draw_current_level() {
-        if (_playing)
-            _current_level = fja.enemyControl.currentLevel;
+    function drawCurrentLevel() {
+        if (playing) {
+            currentLevel = fja.enemyControl.currentLevel;
+        }
 
         fja.canvasContext.font = "bold 22px";
         fja.canvasContext.fillStyle = "#FFFFFF";
         fja.canvasContext.textAlign = "left";
         fja.canvasContext.textBaseline = "top";
-        fja.canvasContext.fillText("Level: " + _current_level, 0, 0);
+        fja.canvasContext.fillText("Level: " + currentLevel, 0, 0);
     }
 
-    function _end_play() {
-        _stop_given_render_prep(_collision_check_callback_id);
+    function endPlay() {
+        stopGivenRenderPrepId(collisionCheckCallbackId);
+
         fja.enemyControl.stopSpawn();
         fja.playerControl.deInitPlayer();
         fja.screen.clearScreen();
-        _playing = false;
-        _game_over_msg_callback_id = fja.screen.addToRenderPreperation(_draw_game_over_msg);
-        setTimeout(_prepare_for_play, _game_start_delay_ms);
+
+        playing = false;
+        gameOverMsgCallbackId = fja.screen.addToRenderPreperation(drawGameOverMsg);
+
+        setTimeout(prepeareForPlay, gameStartDelay);
     }
 
-    function _draw_game_over_msg() {
+    function drawGameOverMsg() {
         var xPos = fja.canvas.width / 2,
             yPos = fja.canvas.height / 2;
 
@@ -84,7 +91,7 @@ fja.gameControl = (function () {
         fja.canvasContext.fillText("Game Over", xPos, yPos);
     }
 
-    function _stop_given_render_prep(renderPrepID) {
+    function stopGivenRenderPrepId(renderPrepID) {
         fja.screen.removeFromRenderPreperation(renderPrepID);
     }
 })();
