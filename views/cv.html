@@ -2,19 +2,23 @@
 
 {% block subtitle %}- CV{% endblock %}
 
+{% block css%}
+    <link href="css/cv.css" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
 <img src="/img/contact.jpg" alt="Bilde av søker"/>
 
 <h2>Robin Heggelund Hansen</h2>
 
-<ul>
-    <li class="header">Systemtuvikler</li>
+<ul class="topic-group">
+    <li class="header">Systemtutvikler</li>
     <li>Vant til å jobbe i stillinger hvor det er kritisk å raskt kunne lære seg nye ferdigheter. Brenner for programmering, og driver en del selv-opplæring på nye emner for å tilegne meg mest mulig kunnskap.</li>
 </ul>
 
 <h2>Utdanning</h2>
 
-<ul>
+<ul class="topic-group">
     <li class="header">Lillestrøm VGS, 2005-2007</li>
     <li>Grunnleggende studiekompetanse.</li>
     <li class="header">Universitet i Oslo, 2011-2012</li>
@@ -23,7 +27,7 @@
 
 <h2>Erfaring</h2>
 
-<ul>
+<ul class="topic-group">
     <li class="header">IT-Journalist, Hardware.no, 2007-2009</li>
     <li>Ansatt på frilans-basis. Skrevet tilsammen 211 artikler som inkluderer tester, notiser og intervjuer. Hovedfokus på GNU/Linux-baserte operativsystem og åpen kildekode.</li>
     <li class="header">Sambandsteknikker, Artilleribattaljonen i Hæren, 2009-2011</li>
@@ -36,20 +40,53 @@
 
 <h2>Ferdigheter</h2>
 
-<ul>
+<ul class="topic-group">
     <li class="header">Språk</li>
     <li>Snakker, og skriver, flytende engelsk.</li>
+
     <li class="header">Programmeringsspråk, med praktisk erfaring</li>
-    <li>C, C++, Javascript, Python, C#, Java, Clojure, Lua, CoffeeScript og Objective-C.</li>
+    <li><ul>
+        <li>C/C++</li>
+        <li>Javascript</li>
+        <li>Python</li>
+        <li>C#</li>
+        <li>Java</li>
+        <li>Clojure</li>
+        <li>Lua</li>
+        <li>CoffeeScript</li>
+        <li>Objective-C</li>
+    </ul></li>
+
     <li class="header">Programmeringsspråk, uten praktisk erfaring</li>
-    <li>Scheme, Vala, Go, Scala, Haskell, Erlang  og F#.</li>
+    <li><ul>
+        <li>Scheme</li>
+        <li>Vala</li>
+        <li>Go</li>
+        <li>Scala</li>
+        <li>Haskell</li>
+        <li>Erlang</li>
+        <li>F#</li>
+    </ul></li>
+
     <li class="header">Teknologi og rammeverk</li>
-    <li>NodeJS, JQuery, Django, MySQL/PostgreSQL, MongoDD, Redis, PaaS, CSS3 og HTML5.</li>
+    <li><ul>
+        <li>Git</li>
+        <li>Mercurial</li>
+        <li>NodeJS</li>
+        <li>JQuery</li>
+        <li>Django</li>
+        <li>MySQL/PostgreSQL</li>
+        <li>MongoDB</li>
+        <li>Redis</li>
+        <li>PaaS/SaaS</li>
+        <li>CSS3</li>
+        <li>HTML5</li>
+    </ul></li>
 </ul>
 
 <h2>Referanser</h2>
 
-<ul>
+<ul class="topic-group">
     <li class="header">Lars Storjord</li>
     <li>Konsulent på Mesan, tidligere sjefsutvikler i Mynt.</li>
     <li>Tlf: 416 26 373</li>
@@ -62,7 +99,7 @@
 
 <h2>Kontakt</h2>
 
-<ul>
+<ul class="topic-group">
     <li>Tlf: 454 74 775</li>
     <li>E-post: robin.heggelund.hansen@payex.com</li>
 </ul>
