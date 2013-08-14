@@ -1,6 +1,6 @@
-fja = fja || {};
+var sja = sja || {};
 
-fja.enemyControl = (function() {
+sja.enemyControl = (function() {
     "use strict";
 
     var isSpawning = false,
@@ -24,13 +24,13 @@ fja.enemyControl = (function() {
         isSpawning = true;
         currentLevel = 1;
         spawnEnemies(1);
-        enemiesControlCallbackId = fja.screen.addToRenderPreperation(controlEnemies);
+        enemiesControlCallbackId = sja.screen.addToRenderPreperation(controlEnemies);
     }
 
     function stopSpawn() {
         isSpawning = false;
         currentLevel = 0;
-        fja.screen.removeFromRenderPreperation(enemiesControlCallbackId);
+        sja.screen.removeFromRenderPreperation(enemiesControlCallbackId);
         enemiesControlCallbackId = -1;
         spawnedEnemies = [];
     }
@@ -110,14 +110,14 @@ fja.enemyControl = (function() {
             return;
         }
 
-        sprite = fja.createSprite("rocket.png", 1, 1, 1);
-        randomXPosition = Math.floor(Math.random() * fja.screen.canvasWidth);
+        sprite = sja.createSprite("rocket.png", 1, 1, 1);
+        randomXPosition = Math.floor(Math.random() * sja.screen.canvasWidth);
 
         sprite.creationTime = Date.now();
         sprite.move(randomXPosition, (sprite.height * -1));
 
         spawnedEnemies.push(sprite);
-        fja.screen.addToRenderList(sprite);
+        sja.screen.addToRenderList(sprite);
         enemiesToSpawn--;
     }
 
@@ -138,7 +138,7 @@ fja.enemyControl = (function() {
             }
 
             lifeExpectancyProgress = timeDiff / enemyLifeExpectancy;
-            newYPosition = fja.screen.canvasHeight * lifeExpectancyProgress;
+            newYPosition = sja.screen.canvasHeight * lifeExpectancyProgress;
 
             tmpSprite.move(tmpSprite.x, newYPosition);
         }
@@ -157,6 +157,6 @@ fja.enemyControl = (function() {
     }
 
     function removeSprintFromRenderList(spriteToRemove) {
-        fja.screen.removeFromRenderList(spriteToRemove.__id__);
+        sja.screen.removeFromRenderList(spriteToRemove.__id__);
     }
 })();

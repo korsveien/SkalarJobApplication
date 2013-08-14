@@ -1,6 +1,6 @@
-var fja = fja || {};
+var sja = sja || {};
 
-fja.createSprite = function(filename, fps, animations, frames) {
+sja.createSprite = function(filename, fps, animations, frames) {
     "use strict";
 
     var image = new Image(),
@@ -21,8 +21,8 @@ fja.createSprite = function(filename, fps, animations, frames) {
     return {
         get x() { return x; },
         get y() { return y; },
-        get width() { return frameWidth * fja.screen.canvasWidthScale; },
-        get height() { return frameHeight * fja.screen.canvasHeightScale; },
+        get width() { return frameWidth * sja.screen.canvasWidthScale; },
+        get height() { return frameHeight * sja.screen.canvasHeightScale; },
 
         render: render,
         move: move,
@@ -31,10 +31,10 @@ fja.createSprite = function(filename, fps, animations, frames) {
 
 
     function render() {
-        var widthDrawSize = frameWidth * fja.screen.canvasWidthScale,
-            heightDrawSize = frameHeight * fja.screen.canvasHeightScale;
+        var widthDrawSize = frameWidth * sja.screen.canvasWidthScale,
+            heightDrawSize = frameHeight * sja.screen.canvasHeightScale;
 
-        fja.canvasContext.drawImage(image,
+        sja.canvasContext.drawImage(image,
                                     getXOffset(), getYOffset(), frameWidth, frameHeight,
                                     x, y, widthDrawSize, heightDrawSize);
         needRender = false;

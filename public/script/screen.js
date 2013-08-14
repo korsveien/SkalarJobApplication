@@ -1,6 +1,6 @@
-var fja = fja || {};
+var sja = sja || {};
 
-fja.screen = (function() {
+sja.screen = (function() {
     "use strict";
 
     var renderPreperationCallbacks = [],
@@ -13,8 +13,8 @@ fja.screen = (function() {
 
 
     return {
-        get canvasWidth() { return fja.canvas.width; },
-        get canvasHeight() { return fja.canvas.height; },
+        get canvasWidth() { return sja.canvas.width; },
+        get canvasHeight() { return sja.canvas.height; },
         get canvasWidthScale() { return canvasWidthScale; },
         get canvasHeightScale() { return canvasHeightScale; },
 
@@ -75,8 +75,8 @@ fja.screen = (function() {
         var i,
             len = renderList.length;
 
-        fja.canvasContext.fillStyle = "#000000";
-        fja.canvasContext.fillRect(0, 0, fja.screen.canvasWidth, fja.screen.canvasHeight);
+        sja.canvasContext.fillStyle = "#000000";
+        sja.canvasContext.fillRect(0, 0, sja.screen.canvasWidth, sja.screen.canvasHeight);
 
         renderPreperation();
 
@@ -90,7 +90,7 @@ fja.screen = (function() {
     }
 
     function calculateCanvasScale() {
-        canvasWidthScale = fja.canvas.width / originalCanvasWidth;
-        canvasHeightScale = fja.canvas.height / originalCanvasHeight;
+        canvasWidthScale = sja.canvas.width / originalCanvasWidth;
+        canvasHeightScale = sja.canvas.height / originalCanvasHeight;
     }
 })();

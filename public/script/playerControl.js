@@ -1,9 +1,9 @@
-fja = fja || {};
+var sja = sja || {};
 
-fja.playerControl = (function() {
+sja.playerControl = (function() {
     "use strict";
 
-    var playerSprite = fja.createSprite("player.png", 1, 1, 1),
+    var playerSprite = sja.createSprite("player.png", 1, 1, 1),
         xTarget = 0,
         yTarget = 0,
         pixelMovementPerMs = 0.1,
@@ -20,26 +20,26 @@ fja.playerControl = (function() {
 
 
     function initPlayer() {
-        var middleOfScreen = fja.screen.canvasWidth/2,
-            bottomOfScreen = fja.screen.canvasHeight - playerSprite.height/2;
+        var middleOfScreen = sja.screen.canvasWidth/2,
+            bottomOfScreen = sja.screen.canvasHeight - playerSprite.height/2;
 
         setXyTarget(middleOfScreen, bottomOfScreen);
         playerSprite.move(middleOfScreen, bottomOfScreen);
 
-        fja.canvas.onmousedown = onInput;
-        fja.screen.addToRenderPreperation(movePlayerToTarget);
-        fja.screen.addToRenderList(playerSprite);
+        sja.canvas.onmousedown = onInput;
+        sja.screen.addToRenderPreperation(movePlayerToTarget);
+        sja.screen.addToRenderList(playerSprite);
     }
 
     function deInitPlayer() {
-        fja.screen.removeFromRenderPreperation(movePlayerCallbackId);
+        sja.screen.removeFromRenderPreperation(movePlayerCallbackId);
         movePlayerCallbackId = -1;
-        fja.canvas.onmousedown = "";
+        sja.canvas.onmousedown = "";
     }
 
     function onInput(event) {
-        var actualX = event.pageX - fja.canvas.offsetLeft,
-            actualY = event.pageY - fja.canvas.offsetTop;
+        var actualX = event.pageX - sja.canvas.offsetLeft,
+            actualY = event.pageY - sja.canvas.offsetTop;
 
         setXyTarget(actualX, actualY);
     }

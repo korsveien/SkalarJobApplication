@@ -1,6 +1,6 @@
-var fja = fja || {};
+var sja = sja || {};
 
-fja.gameControl = (function () {
+sja.gameControl = (function () {
     "use strict";
 
     var beginPlayMsgCallbackId = -1,
@@ -18,40 +18,40 @@ fja.gameControl = (function () {
 
 
     function prepeareForPlay() {
-        fja.canvas.onclick = beginPlay;
+        sja.canvas.onclick = beginPlay;
 
         if (gameOverMsgCallbackId !== -1) {
             stopGivenRenderPrepId(gameOverMsgCallbackId);
         }
 
-        beginPlayMsgCallbackId = fja.screen.addToRenderPreperation(drawBeginPlayMsg);
+        beginPlayMsgCallbackId = sja.screen.addToRenderPreperation(drawBeginPlayMsg);
 
         if (currentLevelDrawCallbackId === -1) {
-            currentLevelDrawCallbackId = fja.screen.addToRenderPreperation(drawCurrentLevel);
+            currentLevelDrawCallbackId = sja.screen.addToRenderPreperation(drawCurrentLevel);
         }
     }
 
     function drawBeginPlayMsg() {
-        var xPos = fja.canvas.width / 2,
-            yPos = fja.canvas.height / 2;
+        var xPos = sja.canvas.width / 2,
+            yPos = sja.canvas.height / 2;
 
-        fja.canvasContext.font = "12pt sans-serif";
-        fja.canvasContext.fillStyle = "#FFFFFF";
-        fja.canvasContext.textAlign = "center";
-        fja.canvasContext.fillText("Click to start new game", xPos, yPos);
+        sja.canvasContext.font = "12pt sans-serif";
+        sja.canvasContext.fillStyle = "#FFFFFF";
+        sja.canvasContext.textAlign = "center";
+        sja.canvasContext.fillText("Click to start new game", xPos, yPos);
     }
 
     function beginPlay() {
         stopGivenRenderPrepId(beginPlayMsgCallbackId);
-        fja.playerControl.initPlayer();
-        fja.enemyControl.startSpawn();
-        collisionCheckCallbackId = fja.screen.addToRenderPreperation(collisionCheck);
-        fja.canvas.onclick = "";
+        sja.playerControl.initPlayer();
+        sja.enemyControl.startSpawn();
+        collisionCheckCallbackId = sja.screen.addToRenderPreperation(collisionCheck);
+        sja.canvas.onclick = "";
         playing = true;
     }
 
     function collisionCheck() {
-        if (fja.enemyControl.checkForCollision(fja.playerControl.playerSprite)) {
+        if (sja.enemyControl.checkForCollision(sja.playerControl.playerSprite)) {
             endPlay();
         }
     }
@@ -61,39 +61,39 @@ fja.gameControl = (function () {
             return;
         }
 
-        currentLevel = fja.enemyControl.currentLevel;
+        currentLevel = sja.enemyControl.currentLevel;
 
-        fja.canvasContext.font = "12pt sans-serif";
-        fja.canvasContext.fillStyle = "#FFFFFF";
-        fja.canvasContext.textAlign = "left";
-        fja.canvasContext.textBaseline = "top";
-        fja.canvasContext.fillText("Level: " + currentLevel, 0, 0);
+        sja.canvasContext.font = "12pt sans-serif";
+        sja.canvasContext.fillStyle = "#FFFFFF";
+        sja.canvasContext.textAlign = "left";
+        sja.canvasContext.textBaseline = "top";
+        sja.canvasContext.fillText("Level: " + currentLevel, 0, 0);
     }
 
     function endPlay() {
         stopGivenRenderPrepId(collisionCheckCallbackId);
 
-        fja.enemyControl.stopSpawn();
-        fja.playerControl.deInitPlayer();
-        fja.screen.clearScreen();
+        sja.enemyControl.stopSpawn();
+        sja.playerControl.deInitPlayer();
+        sja.screen.clearScreen();
 
         playing = false;
-        gameOverMsgCallbackId = fja.screen.addToRenderPreperation(drawGameOverMsg);
+        gameOverMsgCallbackId = sja.screen.addToRenderPreperation(drawGameOverMsg);
 
         setTimeout(prepeareForPlay, gameStartDelay);
     }
 
     function drawGameOverMsg() {
-        var xPos = fja.canvas.width / 2,
-            yPos = fja.canvas.height / 2;
+        var xPos = sja.canvas.width / 2,
+            yPos = sja.canvas.height / 2;
 
-        fja.canvasContext.font = "12pt sans-serif";
-        fja.canvasContext.fillStyle = "#FFFFFF";
-        fja.canvasContext.textAlign = "center";
-        fja.canvasContext.fillText("Game Over", xPos, yPos);
+        sja.canvasContext.font = "12pt sans-serif";
+        sja.canvasContext.fillStyle = "#FFFFFF";
+        sja.canvasContext.textAlign = "center";
+        sja.canvasContext.fillText("Game Over", xPos, yPos);
     }
 
     function stopGivenRenderPrepId(renderPrepID) {
-        fja.screen.removeFromRenderPreperation(renderPrepID);
+        sja.screen.removeFromRenderPreperation(renderPrepID);
     }
 })();
