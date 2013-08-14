@@ -42,16 +42,14 @@ sja.enemyControl = (function() {
 
     function checkForCollision(sprite) {
         var spriteToCheck = retrieveCollisionPoints(sprite),
-            collisionSprite, i;
+            collisionSprite, i
 
         for (i = 0; i < spawnedEnemies.length; i++) {
             collisionSprite = retrieveCollisionPoints(spawnedEnemies[i]);
 
-            if (checkSpriteCollision(spriteToCheck, collisionSprite)) {
-                return true;
-            }
-
-            if (checkSpriteCollision(collisionSprite, spriteToCheck)) {
+            if (checkSpriteCollision(spriteToCheck, collisionSprite)
+                || checkSpriteCollision(collisionSprite, spriteToCheck))
+            {
                 return true;
             }
         }
@@ -97,7 +95,7 @@ sja.enemyControl = (function() {
         for (index = 0; index < numberOfEnemies; index++) {
             var additionalWait = Math.floor(Math.random() * spawnInterval);
             enemiesToSpawn = numberOfEnemies;
-            setTimeout(spawnEnemy, spawnInterval*index+additionalWait);
+            setTimeout(spawnEnemy, (spawnInterval * index) + additionalWait);
         }
     }
 
@@ -122,14 +120,12 @@ sja.enemyControl = (function() {
     }
 
     function controlEnemies() {
-        var i,
-            timeDiff,
+        var timeDiff,
             lifeExpectancyProgress,
             tmpSprite,
             newYPosition;
 
-        for (i = 0; i < spawnedEnemies.length; i++) {
-            tmpSprite = spawnedEnemies[i];
+        spawnedEnemies.forEach(function(tmpSprite) {
             timeDiff = Date.now() - tmpSprite.creationTime;
 
             if (timeDiff > enemyLifeExpectancy) {
@@ -141,7 +137,7 @@ sja.enemyControl = (function() {
             newYPosition = sja.screen.canvasHeight * lifeExpectancyProgress;
 
             tmpSprite.move(tmpSprite.x, newYPosition);
-        }
+        });
 
         if (enemiesToSpawn === 0 && isSpawning) {
             increaseLevel();
@@ -149,11 +145,15 @@ sja.enemyControl = (function() {
     }
 
     function removeSpriteFromSpawnedList(spriteToRemove) {
-        for (var i = 0; i < spawnedEnemies.length; i++) {
-            if (spawnedEnemies[i].creationTime === spriteToRemove.creationTime) {
-                spawnedEnemies.splice(i, 1);
+        var altered = [];
+
+        spawnedEnemies.forEach(function(enemy) {
+            if (enemy !== spriteToRemove) {
+                altered.push(enemy);
             }
-        }
+        });
+
+        spawnedEnemies = altered;
     }
 
     function removeSprintFromRenderList(spriteToRemove) {

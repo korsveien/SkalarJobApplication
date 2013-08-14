@@ -62,31 +62,21 @@ sja.screen = (function() {
         }
     }
 
-    function renderPreperation() {
-        var i,
-            len = renderPreperationCallbacks.length;
-
-        for (i = 0; i < len; i++) {
-            renderPreperationCallbacks[i]();
-        }
-    }
-
     function render() {
-        var i,
-            len = renderList.length;
-
         sja.canvasContext.fillStyle = "#000000";
         sja.canvasContext.fillRect(0, 0, sja.screen.canvasWidth, sja.screen.canvasHeight);
 
-        renderPreperation();
+        renderPreperationCallbacks.forEach(function(cb) {
+            cb();
+        });
 
-        for (i = 0; i < len; i++) {
-            renderList[i].render();
-        }
+        renderList.forEach(function(renderable) {
+            renderable.render();
+        });
     }
 
     function clearScreen() {
-        renderList = [];
+        renderList.length = 0;
     }
 
     function calculateCanvasScale() {
