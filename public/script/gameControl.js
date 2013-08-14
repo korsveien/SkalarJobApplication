@@ -35,10 +35,10 @@ fja.gameControl = (function () {
         var xPos = fja.canvas.width / 2,
             yPos = fja.canvas.height / 2;
 
-        fja.canvasContext.font = "bold 22px";
+        fja.canvasContext.font = "12pt sans-serif";
         fja.canvasContext.fillStyle = "#FFFFFF";
         fja.canvasContext.textAlign = "center";
-        fja.canvasContext.fillText("Click to start game", xPos, yPos);
+        fja.canvasContext.fillText("Click to start new game", xPos, yPos);
     }
 
     function beginPlay() {
@@ -57,11 +57,13 @@ fja.gameControl = (function () {
     }
 
     function drawCurrentLevel() {
-        if (playing) {
-            currentLevel = fja.enemyControl.currentLevel;
+        if (!playing) {
+            return;
         }
 
-        fja.canvasContext.font = "bold 22px";
+        currentLevel = fja.enemyControl.currentLevel;
+
+        fja.canvasContext.font = "12pt sans-serif";
         fja.canvasContext.fillStyle = "#FFFFFF";
         fja.canvasContext.textAlign = "left";
         fja.canvasContext.textBaseline = "top";
@@ -85,7 +87,7 @@ fja.gameControl = (function () {
         var xPos = fja.canvas.width / 2,
             yPos = fja.canvas.height / 2;
 
-        fja.canvasContext.fontSize = "36px";
+        fja.canvasContext.font = "12pt sans-serif";
         fja.canvasContext.fillStyle = "#FFFFFF";
         fja.canvasContext.textAlign = "center";
         fja.canvasContext.fillText("Game Over", xPos, yPos);
