@@ -37,6 +37,7 @@ sja.createSprite = function(filename, fps, animations, frames) {
         sja.canvasContext.drawImage(image,
                                     getXOffset(), getYOffset(), frameWidth, frameHeight,
                                     x, y, widthDrawSize, heightDrawSize);
+
         needRender = false;
         setNextFrame();
     }
@@ -61,6 +62,7 @@ sja.createSprite = function(filename, fps, animations, frames) {
     function setImageSource(filename) {
         image.src = "img/" + filename;
         image.onload = setFrameDimensions;
+        setFrameDimensions(); // Some browsers don't call image.onload, if already loaded
     }
 
     function setFrameInterval(fps) {
@@ -88,8 +90,9 @@ sja.createSprite = function(filename, fps, animations, frames) {
             currentFrame += 1;
             timeSinceLastFrame = currentTime;
 
-            if (currentFrame >= frames)
+            if (currentFrame >= frames) {
                 currentFrame = 0;
+            }
         }
     }
 };
