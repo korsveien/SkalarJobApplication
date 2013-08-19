@@ -1,0 +1,14 @@
+#canvas {
+    float: left;
+}
+
+#highscores {
+    margin: 0em 0em 0em 0em;
+    padding: 0;
+    float: left;
+}
+
+#highscores h3 {
+    margin: 0em 0em 0em 0.5em;
+    padding: 0;
+}

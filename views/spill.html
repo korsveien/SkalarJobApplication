@@ -2,6 +2,10 @@
 
 {% block subtitle %}- Spill{% endblock %}
 
+{% block css %}
+    <link href="css/spill.css" rel="stylesheet" />
+{% endblock %}
+
 {% block scripts %}
     <script src="script/sja.js" type="text/javascript"></script>
     <script src="script/utils.js" type="text/javascript"></script>
@@ -17,11 +21,19 @@
 {% endblock %}
 
 {% block content %}
-    <canvas id="canvas" width="240" height="420"></canvas>
     <h3>Jet Challenge</h3>
 
     <p>The goal in this game is to avoid the incoming missiles for as long as possible.
         Control your airplane with your mouse, clicking on the place you wish it to fly.</p>
 
     <p>Good luck!</p>
+
+    <div id="game-view">
+        <canvas id="canvas" width="240" height="420"></canvas>
+
+        <div id="highscores">
+            <h3>Highscores</h3>
+            <ol id="highscore-list"></ol>
+        </div>
+    </div>
 {% endblock %}
