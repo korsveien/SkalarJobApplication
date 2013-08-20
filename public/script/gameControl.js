@@ -80,6 +80,8 @@ sja.gameControl = (function () {
         playing = false;
         gameOverMsgCallbackId = sja.screen.addToRenderPreperation(drawGameOverMsg);
 
+        sja.highscores.registerHighscore(currentLevel);
+
         setTimeout(prepeareForPlay, gameStartDelay);
     }
 
