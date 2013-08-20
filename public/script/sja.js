@@ -10,4 +10,5 @@ sja.init = function() {
     setInterval(sja.screen.render, 10);
 
     sja.gameControl.prepareForPlay();
+    sja.highscores.populateHighscoreList();
 };

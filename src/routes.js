@@ -1,3 +1,5 @@
+var highscore = require(__dirname + "/highscores");
+
 var menuItems = [
     { name: "Søknad", url: "/" },
     { name: "CV", url: "/cv" },
@@ -25,4 +27,7 @@ exports.init = function (app) {
             menuItems: menuItems
         });
     });
+
+    app.get("/highscores", highscore.getTopTen);
+    app.put("/highscores/:name/:score", highscore.registerScore);
 }
