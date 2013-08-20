@@ -1,19 +1,28 @@
-exports.getTopTen = function(req, res) {
-    var sampleList = [
-        {name: "RHH", score: 12},
-        {name: "KHH", score: 10},
-        {name: "LAS", score: 8},
-        {name: "JHA", score: 7}
-    ]
+// Just keep the list in-memory
+// Would've used a proper database for a real web-app
+var topTen = [];
 
+exports.getTopTen = function(req, res) {
     res.send({
-        topTen: sampleList
+        topTen: topTen
     });
 };
 
 exports.registerScore = function(req, res) {
-    console.log(req.params["name"]);
-    console.log(req.params["score"]);
+    var scoreDescriptor = {
+        name: req.params.name,
+        score: req.params.score
+    };
+
+    topTen.push(scoreDescriptor);
+
+    topTen.sort(function(a, b) {
+        return b.score - a.score;
+    });
+
+    if (topTen.length > 10) {
+        topTen.length = 10;
+    }
 
     res.send(201);
 };

@@ -55,11 +55,6 @@ sja.highscores = (function() {
 
         previousName = name;
 
-        if (highscores.length <= 0 || highscores[highscores.length - 1].score >= score) {
-            // No point in registering score if it didn't make the top ten
-            return;
-        }
-
         sja.ajax("PUT", "highscores/" + name + "/" + score, function(status, res) {
             if (status === 201) {
                 populateHighscoreList();
