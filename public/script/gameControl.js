@@ -51,7 +51,7 @@ sja.gameControl = (function () {
         sja.canvas.onclick = "";
 
         playing = true;
-        gameStarted = new Date();
+        gameStarted = Date.now();
     }
 
     function collisionCheck() {
@@ -65,7 +65,7 @@ sja.gameControl = (function () {
             return;
         }
 
-        currentScore = Math.floor((new Date() - gameStarted) / 100);
+        currentScore = Math.floor((Date.now() - gameStarted) / 100);
 
         sja.canvasContext.font = "12pt sans-serif";
         sja.canvasContext.fillStyle = "#FFFFFF";
