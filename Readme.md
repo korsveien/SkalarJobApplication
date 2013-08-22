@@ -1,17 +1,18 @@
-# Funkbit Job Application
+# Skalar Job Application
 
-This is the job application I used to get a part time job as a software developer at Funkbit.
-It includes a HTML5 game (highscore is level 11) and some information about myself.
+Job application as a project, made for Skalar AS.
+The project contains the actual job application, CV and a small canvas-based
+game (to give evaluators more code to evaluate), packed as a Node.js and HTML5
+projected.
 
 ## How to use
 
-Checkout and open index.html in a modern browser like Google Chrome.
+You can visit the website at www.skalarjobbsoeknad.com.
 
-## Code naming convention
+To setup locally, you need Node.js and npm.
 
-All publically accessible as well as local variables and functions are camelCased. Inaccessible/private functions and
-variables are _underscore_seperated. Trust me, it made sense at the time.
+Run `npm update -d` in the project root folder, then start the server with
+`node index.js`.
 
-## Other
-
-The job application should be self explanitory, just read the information contained in index.html
+You can now view the website by opening the following url in your browser:
+`localhost:8080`
