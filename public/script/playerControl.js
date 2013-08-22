@@ -20,8 +20,8 @@ sja.playerControl = (function() {
 
 
     function initPlayer() {
-        var middleOfScreen = sja.screen.canvasWidth/2,
-            bottomOfScreen = sja.screen.canvasHeight - playerSprite.height/2;
+        var middleOfScreen = sja.screen.canvasWidth / 2,
+            bottomOfScreen = sja.screen.canvasHeight - playerSprite.height;
 
         setXyTarget(middleOfScreen, bottomOfScreen);
         playerSprite.move(middleOfScreen, bottomOfScreen);
@@ -51,12 +51,12 @@ sja.playerControl = (function() {
 
     function movePlayerToTarget() {
         var timeSinceLastMovement = Date.now() - lastMovementTime,
-            pixels_to_move = Math.round(timeSinceLastMovement * pixelMovementPerMs),
-            i,
+            pixelsToMove = Math.round(timeSinceLastMovement * pixelMovementPerMs),
             newXPos = playerSprite.x,
-            newYPos = playerSprite.y;
+            newYPos = playerSprite.y,
+            i;
 
-        for (i = 0; i < pixels_to_move; i++) {
+        for (i = 0; i < pixelsToMove; i++) {
             if (playerSprite.x < xTarget) {
                 newXPos++;
             } else if (playerSprite.x > xTarget) {
@@ -72,10 +72,32 @@ sja.playerControl = (function() {
 
         lastMovementTime = Date.now();
 
-        if (newXPos < 0 || newYPos < 0) {
-            return;
+        if (xPosIsOffscreen(newXPos)) {
+            newXPos = playerSprite.x;
+        } else if (yPosIsOffscreen(newYPos)) {
+            newYPos = playerSprite.y;
         }
 
         playerSprite.move(newXPos, newYPos);
+    }
+
+    function xPosIsOffscreen(x) {
+        if (x < 0) {
+            return true;
+        } else if (x + playerSprite.width > sja.screen.canvasWidth) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function yPosIsOffscreen(y) {
+        if (y < 0) {
+            return true;
+        } else if (y + playerSprite.height > sja.screen.canvasHeight) {
+            return true;
+        }
+
+        return false;
     }
 })();

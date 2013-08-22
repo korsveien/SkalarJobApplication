@@ -99,6 +99,7 @@ sja.enemyControl = (function() {
 
     function spawnEnemy() {
         var sprite,
+            maxXPosSpawn,
             randomXPosition;
 
         if (!isSpawning) {
@@ -107,7 +108,8 @@ sja.enemyControl = (function() {
         }
 
         sprite = sja.createSprite("rocket.png", 1, 1, 1);
-        randomXPosition = Math.floor(Math.random() * sja.screen.canvasWidth);
+        maxXPosSpawn = sja.screen.canvasWidth - sprite.width;
+        randomXPosition = Math.floor(Math.random() * maxXPosSpawn);
 
         sprite.creationTime = Date.now();
         sprite.move(randomXPosition, (sprite.height * -1));
