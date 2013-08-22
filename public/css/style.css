@@ -10,28 +10,26 @@ body {
 }
 
 #menuList {
-    width: 24em;
+    width: 19em;
     margin: 0 auto;
+    padding: 0;
 }
 
 .menuItem {
     display: inline-block;
     list-style: none;
-    width: 4em;
     height: 1.8em;
     line-height: 1.8em;
     font-size: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
     text-align: center;
     vertical-align: middle;
 }
 
 .menuItem a {
-    color: #a3d5b9;
-    text-decoration: none;
-}
-
-.menuItem a:hover {
     color: white;
+    text-decoration: none;
 }
 
 #content {
