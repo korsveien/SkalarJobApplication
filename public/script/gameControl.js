@@ -7,7 +7,8 @@ sja.gameControl = (function () {
         gameOverMsgCallbackId = -1,
         collisionCheckCallbackId = -1,
         currentLevelDrawCallbackId = -1,
-        currentLevel = 0,
+        gameStarted = null,
+        currentScore = 0,
         playing = false,
         gameStartDelay = 3500;
 
@@ -45,9 +46,12 @@ sja.gameControl = (function () {
         stopGivenRenderPrepId(beginPlayMsgCallbackId);
         sja.playerControl.initPlayer();
         sja.enemyControl.startSpawn();
+
         collisionCheckCallbackId = sja.screen.addToRenderPreperation(collisionCheck);
         sja.canvas.onclick = "";
+
         playing = true;
+        gameStarted = new Date();
     }
 
     function collisionCheck() {
@@ -61,13 +65,13 @@ sja.gameControl = (function () {
             return;
         }
 
-        currentLevel = sja.enemyControl.currentLevel;
+        currentScore = Math.floor((new Date() - gameStarted) / 100);
 
         sja.canvasContext.font = "12pt sans-serif";
         sja.canvasContext.fillStyle = "#FFFFFF";
         sja.canvasContext.textAlign = "left";
         sja.canvasContext.textBaseline = "top";
-        sja.canvasContext.fillText("Level: " + currentLevel, 0, 0);
+        sja.canvasContext.fillText("Level: " + currentScore, 0, 0);
     }
 
     function endPlay() {
@@ -80,7 +84,7 @@ sja.gameControl = (function () {
         playing = false;
         gameOverMsgCallbackId = sja.screen.addToRenderPreperation(drawGameOverMsg);
 
-        sja.highscores.registerHighscore(currentLevel);
+        sja.highscores.registerHighscore(currentScore);
 
         setTimeout(prepeareForPlay, gameStartDelay);
     }

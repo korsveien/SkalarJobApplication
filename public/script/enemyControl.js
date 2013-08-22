@@ -12,8 +12,6 @@ sja.enemyControl = (function() {
 
 
     return {
-        get currentLevel() { return currentLevel; },
-
         startSpawn: startSpawn,
         stopSpawn: stopSpawn,
         checkForCollision: checkForCollision
